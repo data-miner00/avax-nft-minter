@@ -1,0 +1,15 @@
+[
+  "Latest React 18",
+  "Latest Tailwind v3",
+  "Jest with @testing-library/react configured",
+  "Prettier formatter",
+  "Dark mode",
+  "Internationalization",
+  "Configurable linter rules",
+  "Routes configured",
+  "Not Found page",
+  "Loader",
+  "Environment variables & helpers",
+  "Pnpm package manager",
+  "GitHub workflows"
+]
