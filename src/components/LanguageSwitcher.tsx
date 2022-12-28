@@ -12,9 +12,9 @@ function LanguageSwitcher(): JSX.Element {
   }
 
   return (
-    <div className="relative flex items-center">
+    <div className="relative flex items-center ml-1 bg-gray-600 rounded-xl">
       <button
-        className="flex items-center justify-between px-2"
+        className="flex items-center justify-between p-2"
         onClick={() => setPopoverOpen((state) => !state)}
       >
         <svg
