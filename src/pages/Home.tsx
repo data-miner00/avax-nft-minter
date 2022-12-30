@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import PinataClient from "../utils/pinataClient";
 import { getVariable, Variable } from "../utils/getVariable";
-import { configuraTokenURI, mintNFT as MT } from "../utils/ethersFacade";
+import {
+  configuraTokenURI,
+  mintNFT as MT,
+  getBalance,
+} from "../utils/ethersFacade";
 import { AppContext } from "../context/AppContext";
-
-type NFTMetadata = {
-  tokenId: string;
-  transactionId: string;
-  ipfsLink: string;
-};
+import MintedNFT, { Props as NFTMetadata } from "../components/MintedNFT";
 
 function Home(): JSX.Element {
   const pinataClient = new PinataClient(
@@ -19,98 +18,158 @@ function Home(): JSX.Element {
   const [mintedNFTs, setMintedNFTs] = useState<Array<NFTMetadata>>([]);
   const [NFTName, setNFTName] = useState<string>("");
   const [NFTDescription, setNFTDescription] = useState<string>("");
-  const { contract } = useContext(AppContext);
+  const { contract, setBalance, account } = useContext(AppContext);
+
+  useEffect(() => {
+    const mintedNFTsJSON = localStorage.mintedNFT;
+    if (mintedNFTsJSON) {
+      setMintedNFTs(JSON.parse(mintedNFTsJSON));
+    }
+  }, []);
 
   useEffect(() => {
     console.log(mintedNFTs);
   }, [mintedNFTs]);
 
+  function resetFields() {
+    setSelectedImage(null);
+    setNFTName("");
+    setNFTDescription("");
+  }
+
   async function mintNFT() {
-    // if (selectedImage) {
-    //   const uploadResult = await pinataClient.uploadImage(
-    //     URL.createObjectURL(selectedImage),
-    //     "custom-name"
-    //   );
-    //   const tokenURI = configuraTokenURI(
-    //     uploadResult.imageHash,
-    //     NFTName,
-    //     NFTDescription
-    //   );
-    //   const tx = await MT(tokenURI, contract);
-    //   setMintedNFTs((_mintedNFTs) => [
-    //     ..._mintedNFTs,
-    //     {
-    //       tokenId: tx.nonce,
-    //       transactionId: tx.hash,
-    //       ipfsLink: uploadResult.imageHash,
-    //     },
-    //   ]);
-    // }
+    if (selectedImage) {
+      const uploadResult = await pinataClient.uploadImage(
+        URL.createObjectURL(selectedImage),
+        NFTName
+      );
+      const tokenURI = configuraTokenURI(
+        uploadResult.imageHash,
+        NFTName,
+        NFTDescription
+      );
+      const tx = await MT(tokenURI, contract);
+      setMintedNFTs((_mintedNFTs) => [
+        ..._mintedNFTs,
+        {
+          tokenId: tx.nonce,
+          transactionId: tx.hash,
+          ipfsLink: uploadResult.imageHash,
+          name: NFTName,
+          description: NFTDescription,
+        },
+      ]);
+
+      setBalance(await getBalance(account));
+
+      localStorage.mintedNFT = JSON.stringify(mintedNFTs);
+
+      resetFields();
+    }
   }
 
   return (
-    <div className="max-w-[1400px] mx-auto md:px-8 md:py-8">
-      <h1 className="text-3xl font-semibold text-center mb-20">
-        Upload an image to be minted
-      </h1>
+    <div className="max-w-[1400px] mx-auto md:px-8 md:py-8 flex">
+      <div className="bg-gray-600 rounded-xl px-3 py-2 hover:bg-gray-600/70">
+        <h1 className="pl-2 text-xl font-semibold mb-3">Mint</h1>
 
-      <div className="bg-gray-700 rounded-md h-96 w-[40rem] mx-auto grid place-items-center">
-        {selectedImage ? (
-          <div className="max-w-md">
-            <img
-              className="mb-4 max-h-80"
-              alt="image"
-              src={URL.createObjectURL(selectedImage)}
-            />
-          </div>
-        ) : (
-          <div className="bg-gray-500 rounded-lg">
-            <input
-              className=""
-              type="file"
-              accept=".jpg,.png,.jpeg,.webp"
-              name="uploadImage"
-              onChange={(event) => {
-                console.log(event.target?.files?.item(0));
-                setSelectedImage(event.target?.files?.[0]);
-              }}
-            />
+        <div className="bg-gray-700 rounded-md h-96 w-[40rem] mx-auto grid place-items-center">
+          {selectedImage ? (
+            <div className="max-w-md">
+              <img
+                className="mb-4 max-h-80"
+                alt="image"
+                src={URL.createObjectURL(selectedImage)}
+              />
+            </div>
+          ) : (
+            <div className="bg-gray-500 rounded-lg">
+              <input
+                className=""
+                type="file"
+                accept=".jpg,.png,.jpeg,.webp"
+                name="uploadImage"
+                onChange={(event) => {
+                  console.log(event.target?.files?.item(0));
+                  setSelectedImage(event.target?.files?.[0]);
+                }}
+              />
+            </div>
+          )}
+        </div>
+
+        {selectedImage && (
+          <div className="flex items-center justify-between mt-3">
+            <div className="flex">
+              <input
+                className="block px-3 py-[6px] text-sm rounded dark:bg-gray-700 dark:placeholder:text-gray-500 outline-1 outline-slate-600 focus:outline"
+                type="text"
+                onChange={(event) => setNFTName(event.target.value)}
+                placeholder="NFT Name"
+              />
+              <input
+                className="ml-1 block px-3 py-[6px] text-sm rounded dark:bg-gray-700 dark:placeholder:text-gray-500 outline-1 outline-slate-600 focus:outline"
+                type="text"
+                onChange={(event) => setNFTDescription(event.target.value)}
+                placeholder="Description"
+              />
+            </div>
+            <div className="flex text-sm">
+              <button
+                className="py-2 px-3 bg-red-600 rounded-xl"
+                onClick={() => setSelectedImage(null)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                </svg>
+              </button>
+              <button
+                className="py-2 pl-2 pr-3 ml-2 bg-green-600 rounded-xl flex items-center"
+                onClick={mintNFT}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="block"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                </svg>
+                <span className="block ml-1">Mint</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
-
-      {!selectedImage && (
-        <div className="flex flex-col items-center">
-          <div className="flex text-sm">
-            <button
-              className="p-2 bg-red-600 rounded-xl min-w-[80px]"
-              onClick={() => setSelectedImage(null)}
-            >
-              Remove
-            </button>
-            <button
-              className="p-2 ml-2 bg-green-600 rounded-xl min-w-[80px]"
-              onClick={mintNFT}
-            >
-              Mint
-            </button>
-          </div>
-          <div>
-            <input
-              className="block px-3 py-2 mb-2 rounded dark:bg-gray-700 dark:placeholder:text-white outline-1 outline-slate-600 focus:outline"
-              type="text"
-              onChange={(event) => setNFTName(event.target.value)}
-              placeholder="NFT Name"
-            />
-            <input
-              className="block px-3 py-2 rounded dark:bg-gray-700 dark:placeholder:text-white outline-1 outline-slate-600 focus:outline"
-              type="text"
-              onChange={(event) => setNFTDescription(event.target.value)}
-              placeholder="Description"
-            />
-          </div>
+      <aside className="px-10">
+        <h1 className="text-xl font-semibold mb-3">Minted NFTs</h1>
+        <div>
+          {mintedNFTs.length > 0 ? (
+            mintedNFTs.map((nft) => (
+              <MintedNFT
+                key={nft.tokenId}
+                tokenId={nft.tokenId}
+                transactionId={nft.transactionId}
+                ipfsLink={nft.ipfsLink}
+                description={nft.description}
+                name={nft.name}
+              />
+            ))
+          ) : (
+            <div className="pt-4 text-center text-xs text-gray-600 font-bold">
+              <span>Your newly minted NFT will show here.</span>
+            </div>
+          )}
         </div>
-      )}
+      </aside>
     </div>
   );
 }
