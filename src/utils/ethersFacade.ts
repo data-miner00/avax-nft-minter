@@ -1,3 +1,4 @@
+import { addressEqual } from "@usedapp/core";
 import ethers = require("ethers");
 import abi from "../abis/abi.json";
 
@@ -42,4 +43,17 @@ export async function getBalance(account: string): Promise<string> {
   ).toFixed(3);
 
   return balanceInFixedString;
+}
+
+export async function getOwnedNFTs(account: string, contract: ethers.Contract) {
+  const tokenIds: Array<number> = [];
+
+  const tokenBalance = await contract.balanceOf(account);
+  for (let i = 0; i < tokenBalance; i++) {
+    const tokenId = await contract.tokenOfOwnerByIndex(account, i);
+    const tokenMetadata = await contract.tokenURI(tokenId._hex);
+    tokenIds.push(JSON.parse(tokenMetadata));
+  }
+
+  return tokenIds;
 }
