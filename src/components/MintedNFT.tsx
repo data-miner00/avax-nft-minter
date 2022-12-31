@@ -16,8 +16,8 @@ function MintedNFT({
   description,
 }: Props): JSX.Element {
   return (
-    <div className="rounded-lg bg-gray-700 p-4 flex">
-      <div className="w-64 h-48 bg-gray-200 rounded shrink-0">
+    <div className="rounded-lg bg-gray-700 p-4 flex mb-4">
+      <div className="w-64 bg-gray-800/10 rounded shrink-0">
         <img src={`https://gateway.pinata.cloud/ipfs/${ipfsLink}`} alt={name} />
       </div>
       <div className="ml-4">
