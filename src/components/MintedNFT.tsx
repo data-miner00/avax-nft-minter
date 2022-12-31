@@ -18,17 +18,33 @@ function MintedNFT({
   return (
     <div className="rounded-lg bg-gray-700 p-4 flex mb-4">
       <div className="w-64 bg-gray-800/10 rounded shrink-0">
-        <img src={`https://gateway.pinata.cloud/ipfs/${ipfsLink}`} alt={name} />
+        <img
+          data-testid="minted-img"
+          src={`https://gateway.pinata.cloud/ipfs/${ipfsLink}`}
+          alt={name}
+        />
       </div>
       <div className="ml-4">
         <div>
-          <h3 className="font-bold text-center mb-3 text-lg">
-            {name} <span className="text-gray-300 text-base">#{tokenId}</span>
+          <h3
+            data-testid="minted-name"
+            className="font-bold text-center mb-3 text-lg"
+          >
+            {name}{" "}
+            <span
+              data-testid="minted-tokenId"
+              className="text-gray-300 text-base"
+            >
+              #{tokenId}
+            </span>
           </h3>
-          <p className="text-gray-200 text-sm">{description}</p>
+          <p data-testid="minted-description" className="text-gray-200 text-sm">
+            {description}
+          </p>
         </div>
         <div className="py-2">
           <a
+            data-testid="minted-view-tx"
             href={`https://testnet.snowtrace.io/tx/${transactionId}`}
             target="_blank"
             className="block text-sm bg-pink-500 p-2 rounded-full mb-1 font-bold text-center"
@@ -36,6 +52,7 @@ function MintedNFT({
             View on Snowtrace
           </a>
           <a
+            data-testid="minted-view-img"
             href={`https://gateway.pinata.cloud/ipfs/${ipfsLink}`}
             target="_blank"
             className="block text-sm bg-pink-500 p-2 rounded-full mb-1 font-bold text-center"
