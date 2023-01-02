@@ -3,6 +3,9 @@ import {
   connectToWallet,
   getBalance,
   getContract,
+  getChainInfo,
+  ChainInfo,
+  notConnectedChainInfo,
 } from "../utils/ethersFacade";
 import { getVariable, Variable } from "../utils/getVariable";
 
@@ -17,6 +20,7 @@ export function AppContextProvider({ children }: Props) {
   const [wallet, setWallet] = useState<any>(null);
   const [contract, setContract] = useState<any>(null);
   const [balance, setBalance] = useState<string>("0.000");
+  const [chainInfo, setChainInfo] = useState<ChainInfo>(notConnectedChainInfo);
 
   useEffect(() => {
     const connectProcess = async () => {
@@ -38,6 +42,10 @@ export function AppContextProvider({ children }: Props) {
     connectProcess().catch(console.error);
   }, []);
 
+  useEffect(() => {
+    getChainInfo().then(setChainInfo).catch(console.error);
+  }, [account, wallet]);
+
   return (
     <AppContext.Provider
       value={{
@@ -49,6 +57,8 @@ export function AppContextProvider({ children }: Props) {
         setContract,
         balance,
         setBalance,
+        chainInfo,
+        setChainInfo,
       }}
     >
       {children}

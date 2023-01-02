@@ -2,8 +2,9 @@ import { addressEqual } from "@usedapp/core";
 import ethers = require("ethers");
 import abi from "../abis/abi.json";
 
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+
 export async function connectToWallet(): Promise<ethers.providers.JsonRpcSigner> {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send("eth_requestAccounts", []);
   return provider.getSigner();
 }
@@ -36,7 +37,6 @@ export function configuraTokenURI(
 }
 
 export async function getBalance(account: string): Promise<string> {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
   const balance = await provider.getBalance(account);
   const balanceInFixedString = parseFloat(
     ethers.utils.formatEther(balance)
@@ -56,4 +56,59 @@ export async function getOwnedNFTs(account: string, contract: ethers.Contract) {
   }
 
   return tokenIds;
+}
+
+export async function getChainId(): Promise<number> {
+  const chainId = await provider.send("eth_chainId", []);
+  return parseInt(chainId);
+}
+
+export type ChainInfo = {
+  chainId: number;
+  chainName: string;
+  isTestnet: boolean;
+  currency: string;
+};
+
+export const notConnectedChainInfo: ChainInfo = {
+  chainId: 0,
+  chainName: "Not connected",
+  isTestnet: false,
+  currency: "NUL",
+};
+
+export const defaultUnknownChainInfo: ChainInfo = {
+  chainId: -1,
+  chainName: "Unsupported network",
+  isTestnet: false,
+  currency: "NUL",
+};
+
+const chainInfos: Array<ChainInfo> = [
+  {
+    chainId: 1,
+    chainName: "Ethereum",
+    isTestnet: false,
+    currency: "ETH",
+  },
+  {
+    chainId: 43112,
+    chainName: "Avalanche",
+    isTestnet: false,
+    currency: "AVAX",
+  },
+  {
+    chainId: 43113,
+    chainName: "Avalanche Fuji",
+    isTestnet: true,
+    currency: "AVAX",
+  },
+];
+
+export async function getChainInfo(): Promise<ChainInfo> {
+  const chainId = await getChainId();
+  return (
+    chainInfos.find((info) => info.chainId === chainId) ??
+    defaultUnknownChainInfo
+  );
 }
