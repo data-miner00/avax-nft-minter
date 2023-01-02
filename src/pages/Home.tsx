@@ -11,6 +11,7 @@ import {
 import { AppContext } from "../context/AppContext";
 import MintedNFT, { Props as NFTMetadata } from "../components/MintedNFT";
 import Snackbar from "../components/Snackbar";
+import DragAndDropFilesArea from "../components/DragAndDropFilesArea";
 
 function Home(): JSX.Element {
   const pinataClient = new PinataClient(
@@ -91,7 +92,7 @@ function Home(): JSX.Element {
           <div className="rounded-xl px-3 py-2 bg-gray-600/70">
             <h1 className="pl-2 text-xl font-semibold mb-3">Mint</h1>
 
-            <div className="bg-gray-700 rounded-md h-96 w-[40rem] mx-auto grid place-items-center">
+            <div className="rounded-md h-96 w-[40rem] mx-auto grid place-items-center">
               {selectedImage ? (
                 <div className="max-w-md">
                   <img
@@ -101,47 +102,14 @@ function Home(): JSX.Element {
                   />
                 </div>
               ) : (
-                <>
-                  <label
-                    onDragOver={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                    }}
-                    onDrop={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      setSelectedImage(event.dataTransfer?.files?.[0]);
-                    }}
-                    htmlFor="image-upload"
-                    className="flex flex-col items-center justify-center cursor-pointer rounded-lg bg-gray-600 hover:bg-gray-500 h-80 w-[38rem]"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="36"
-                      height="36"
-                      fill="currentColor"
-                      className="block"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                    </svg>
-                    <span className="block mt-5 text-gray-300">
-                      Drag and drop or click to upload
-                    </span>
-                  </label>
-                  <input
-                    id="image-upload"
-                    className="hidden"
-                    type="file"
-                    accept=".jpg,.png,.jpeg,.webp"
-                    name="uploadImage"
-                    onChange={(event) => {
-                      console.log(event.target?.files?.item(0));
-                      setSelectedImage(event.target?.files?.[0]);
-                    }}
-                  />
-                </>
+                <DragAndDropFilesArea
+                  onDrop={(event) =>
+                    setSelectedImage(event.dataTransfer?.files?.[0])
+                  }
+                  onChange={(event) =>
+                    setSelectedImage(event.target?.files?.[0])
+                  }
+                />
               )}
             </div>
 
