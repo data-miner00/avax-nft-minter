@@ -79,9 +79,9 @@ function Home(): JSX.Element {
 
   return (
     <>
-      <div className="max-w-[1400px] mx-auto md:px-8 md:py-8 flex">
+      <div className="max-w-[1400px] mx-auto md:px-8 md:py-8 flex justify-center items-center">
         <div>
-          <div className="rounded-xl px-3 py-2 bg-gray-700 drop-shadow-lg">
+          <div className="rounded-xl px-3 py-2 bg-gray-700 drop-shadow-lg mt-9">
             <h1 className="pl-2 text-xl font-semibold mb-3">Mint</h1>
 
             <div className="rounded-md h-96 w-[40rem] mx-auto grid place-items-center border border-solid border-gray-600">

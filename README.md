@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="/">
-    <img width="200px" src="public/favicon.svg" />
+    <img width="160px" src="public/favicon.svg" />
   </a>
 
   <h3 align="center">AiotterFI - NFT Minter</h3>
@@ -244,6 +244,7 @@ List of resources that are helpful and would like to give credit to.
 - [global is not defined](https://github.com/WalletConnect/walletconnect-monorepo/issues/1144)
 - [Connect Metamask](https://github.com/jacobedawson/connect-metamask-react-dapp/blob/main/README.md)
 - [Cannot set property of #<Object> which has only a getter](https://github.com/evanw/esbuild/issues/587)
+- [React & TypeScript: Avoid context default value](https://stackoverflow.com/questions/61333188/react-typescript-avoid-context-default-value)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

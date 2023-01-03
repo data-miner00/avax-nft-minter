@@ -14,11 +14,12 @@ function Minted(): JSX.Element {
   }, []);
 
   return (
-    <div>
+    <div className="max-w-[1400px] mx-auto md:px-8">
       <h1 className="text-xl font-semibold mb-3">Minted NFTs</h1>
-      <div>
-        {mintedNFTs.length > 0 ? (
-          mintedNFTs.map((nft) => (
+
+      {mintedNFTs.length > 0 ? (
+        <div>
+          {mintedNFTs.map((nft) => (
             <MintedNFT
               key={nft.tokenId}
               tokenId={nft.tokenId}
@@ -27,13 +28,13 @@ function Minted(): JSX.Element {
               description={nft.description}
               name={nft.name}
             />
-          ))
-        ) : (
-          <div className="pt-4 text-center text-xs text-gray-500 font-bold uppercase">
-            <span>Your newly minted NFT will show here.</span>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="pt-4 text-center text-xs text-gray-500 font-bold uppercase">
+          <span>Your newly minted NFT will show here.</span>
+        </div>
+      )}
     </div>
   );
 }
