@@ -112,3 +112,9 @@ export async function getChainInfo(): Promise<ChainInfo> {
     defaultUnknownChainInfo
   );
 }
+
+export function reloadOnNetworkChange(): void {
+  window.ethereum.on("chainChanged", () => {
+    window.location.reload();
+  });
+}

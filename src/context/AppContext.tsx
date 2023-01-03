@@ -6,6 +6,7 @@ import {
   getChainInfo,
   ChainInfo,
   notConnectedChainInfo,
+  reloadOnNetworkChange,
 } from "../utils/ethersFacade";
 import { getVariable, Variable } from "../utils/getVariable";
 
@@ -40,6 +41,7 @@ export function AppContextProvider({ children }: Props) {
     };
 
     connectProcess().catch(console.error);
+    reloadOnNetworkChange();
   }, []);
 
   useEffect(() => {
