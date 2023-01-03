@@ -92,6 +92,24 @@ const chainInfos: Array<ChainInfo> = [
     currency: "ETH",
   },
   {
+    chainId: 4,
+    chainName: "Rinkeby",
+    isTestnet: true,
+    currency: "ETH",
+  },
+  {
+    chainId: 5,
+    chainName: "Goerli",
+    isTestnet: true,
+    currency: "ETH",
+  },
+  {
+    chainId: 137,
+    chainName: "Polygon",
+    isTestnet: false,
+    currency: "MATIC",
+  },
+  {
     chainId: 43112,
     chainName: "Avalanche",
     isTestnet: false,

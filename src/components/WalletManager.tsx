@@ -16,9 +16,12 @@ function WalletManager(): JSX.Element {
     }
   }, [account]);
 
-  const chainColors = chainInfo.isTestnet
-    ? "bg-amber-300/10 text-yellow-400"
-    : "bg-emerald-300/10 text-green-400";
+  const chainColors =
+    chainInfo.chainId < 1
+      ? "bg-rose-300/10 text-red-400"
+      : chainInfo.isTestnet
+      ? "bg-amber-300/10 text-yellow-400"
+      : "bg-emerald-300/10 text-green-400";
 
   return (
     <div>
