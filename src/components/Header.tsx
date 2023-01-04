@@ -53,13 +53,13 @@ function Header(): JSX.Element {
           </Link>
           <Link
             to="/minted"
-            className="block ml-5 hover:bg-gray-700/50 px-4 py-2 rounded-lg hover:text-white text-gray-500"
+            className="block ml-5 hover:bg-gray-200 dark:hover:bg-gray-700/50 px-4 py-2 rounded-lg hover:text-black dark:hover:text-white text-gray-500"
           >
             Minted
           </Link>
           <Link
             to="/about"
-            className="block ml-5 hover:bg-gray-700/50 px-4 py-2 rounded-lg hover:text-white text-gray-500"
+            className="block ml-5 hover:bg-gray-200 dark:hover:bg-gray-700/50 px-4 py-2 rounded-lg hover:text-black dark:hover:text-white text-gray-500"
           >
             About
           </Link>

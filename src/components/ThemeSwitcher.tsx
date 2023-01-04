@@ -17,7 +17,7 @@ function ThemeSwitcher(): JSX.Element {
 
   return (
     <button
-      className="block ml-1 p-2 bg-gray-600 rounded-xl "
+      className="block ml-1 p-2 bg-gray-200 dark:bg-gray-600 rounded-xl "
       onClick={switchTheme}
     >
       <svg

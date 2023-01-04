@@ -74,10 +74,10 @@ function Home(): JSX.Element {
     <>
       <div className="max-w-[1400px] mx-auto md:px-8 md:py-8 flex justify-center items-center">
         <div>
-          <div className="rounded-xl px-3 py-2 bg-gray-700 drop-shadow-lg mt-9">
+          <div className="rounded-xl px-3 py-2 bg-white dark:bg-gray-700 drop-shadow-lg mt-9">
             <h1 className="pl-2 text-xl font-semibold mb-3">Mint</h1>
 
-            <div className="rounded-md h-96 w-[40rem] mx-auto grid place-items-center border border-solid border-gray-600">
+            <div className="rounded-md h-96 w-[40rem] mx-auto grid place-items-center border border-solid border-gray-50 dark:border-gray-600">
               {selectedImage ? (
                 <div className="max-w-md">
                   <img
@@ -115,7 +115,7 @@ function Home(): JSX.Element {
               </div>
               <div className="flex text-sm">
                 <button
-                  className="py-2 px-3 bg-red-600 rounded-xl"
+                  className="py-2 px-3 bg-rose-400 text-rose-800 dark:text-white dark:bg-red-600 rounded-xl"
                   onClick={() => setSelectedImage(null)}
                 >
                   <svg
@@ -129,7 +129,7 @@ function Home(): JSX.Element {
                   </svg>
                 </button>
                 <button
-                  className="py-2 pl-2 pr-3 ml-2 bg-green-600 rounded-xl flex items-center"
+                  className="py-2 pl-2 pr-3 ml-2 bg-emerald-400 text-emerald-800 dark:text-white dark:bg-green-600 rounded-xl flex items-center"
                   onClick={mintNFT}
                 >
                   <svg

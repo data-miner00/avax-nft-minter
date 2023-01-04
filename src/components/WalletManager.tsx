@@ -43,11 +43,11 @@ function WalletManager(): JSX.Element {
             </svg>
             <span className="block">{chainInfo.chainName}</span>
           </div>
-          <div className="font-mono flex bg-gray-600 rounded-xl pl-3 pr-[2px] py-[2px] items-center">
+          <div className="font-mono flex bg-gray-200 dark:bg-gray-600 rounded-xl pl-3 pr-[2px] py-[2px] items-center">
             <div>
               {balance} {chainInfo.currency}
             </div>
-            <div className="flex items-center ml-3 bg-gray-700 py-1 rounded-xl pl-2 pr-2">
+            <div className="flex items-center ml-3 bg-gray-300/70 dark:bg-gray-700 py-1 rounded-xl pl-2 pr-2">
               <div>{`${account.slice(0, 6)}...${account.slice(
                 account.length - 4,
                 account.length
