@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import PinataClient from "../utils/pinataClient";
 import { getVariable, Variable } from "../utils/getVariable";
@@ -18,8 +18,8 @@ function Home(): JSX.Element {
     getVariable(Variable.REACT_APP_PINATA_API_SECRET)
   );
   const [selectedImage, setSelectedImage] = useState<Blob | null>();
-  const [NFTName, setNFTName] = useState<string>("");
-  const [NFTDescription, setNFTDescription] = useState<string>("");
+  const NFTNameInputRef = useRef<HTMLInputElement>(null);
+  const NFTDescriptionInputRef = useRef<HTMLInputElement>(null);
   const [snackbar, setSnackbar] = useState<
     "info" | "success" | "error" | "default"
   >("default");
@@ -33,12 +33,15 @@ function Home(): JSX.Element {
 
   function resetFields() {
     setSelectedImage(null);
-    setNFTName("");
-    setNFTDescription("");
+    if (NFTNameInputRef.current) NFTNameInputRef.current.value = "";
+    if (NFTDescriptionInputRef.current)
+      NFTDescriptionInputRef.current.value = "";
   }
 
   async function mintNFT() {
-    if (selectedImage) {
+    const NFTName = NFTNameInputRef.current!.value;
+    const NFTDescription = NFTDescriptionInputRef.current!.value;
+    if (selectedImage && NFTName && NFTDescription) {
       try {
         const uploadResult = await pinataClient.uploadImage(
           URL.createObjectURL(selectedImage),
@@ -49,6 +52,7 @@ function Home(): JSX.Element {
           NFTName,
           NFTDescription
         );
+        console.log(tokenURI);
         const tx = await MT(tokenURI, contract);
         setMintedNFTs((_mintedNFTs) => {
           const updatedMintedNFTs = [
@@ -110,13 +114,13 @@ function Home(): JSX.Element {
                 <input
                   className="block px-3 py-[6px] text-sm rounded dark:bg-gray-700 dark:placeholder:text-gray-500 outline-1 outline-slate-600 focus:outline"
                   type="text"
-                  onChange={(event) => setNFTName(event.target.value)}
+                  ref={NFTNameInputRef}
                   placeholder="NFT Name"
                 />
                 <input
                   className="ml-1 block px-3 py-[6px] w-[320px] text-sm rounded dark:bg-gray-700 dark:placeholder:text-gray-500 outline-1 outline-slate-600 focus:outline"
                   type="text"
-                  onChange={(event) => setNFTDescription(event.target.value)}
+                  ref={NFTDescriptionInputRef}
                   placeholder="Description"
                 />
               </div>
