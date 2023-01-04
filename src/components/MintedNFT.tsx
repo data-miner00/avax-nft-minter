@@ -1,7 +1,7 @@
 import React from "react";
 
 export type Props = {
-  tokenId: string;
+  tokenId?: string;
   transactionId?: string;
   ipfsLink: string;
   name: string;
@@ -30,13 +30,16 @@ function MintedNFT({
             data-testid="minted-name"
             className="font-bold text-center mb-3 text-lg"
           >
-            {name}{" "}
-            <span
-              data-testid="minted-tokenId"
-              className="text-gray-300 text-base"
-            >
-              #{tokenId}
-            </span>
+            {name}
+            {tokenId && (
+              <span
+                data-testid="minted-tokenId"
+                className="text-gray-300 text-base"
+              >
+                {" "}
+                #{tokenId}
+              </span>
+            )}
           </h3>
           <p data-testid="minted-description" className="text-gray-200 text-sm">
             {description}

@@ -1,17 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { AppContext } from "../context/AppContext";
 import MintedNFT from "../components/MintedNFT";
 
 function Minted(): JSX.Element {
-  const { mintedNFTs, setMintedNFTs } = useContext(AppContext);
-
-  useEffect(() => {
-    const mintedNFTsJSON = localStorage.mintedNFT;
-    if (mintedNFTsJSON) {
-      setMintedNFTs(JSON.parse(mintedNFTsJSON));
-    }
-  }, []);
+  const { mintedNFTs } = useContext(AppContext);
 
   return (
     <div className="max-w-[1400px] mx-auto md:px-8">
@@ -19,9 +12,9 @@ function Minted(): JSX.Element {
 
       {mintedNFTs.length > 0 ? (
         <div>
-          {mintedNFTs.map((nft) => (
+          {mintedNFTs.map((nft, index) => (
             <MintedNFT
-              key={nft.tokenId}
+              key={index}
               tokenId={nft.tokenId}
               transactionId={nft.transactionId}
               ipfsLink={nft.ipfsLink}

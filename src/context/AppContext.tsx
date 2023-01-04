@@ -8,6 +8,7 @@ import {
   ChainInfo,
   notConnectedChainInfo,
   reloadOnNetworkChange,
+  getOwnedNFTs,
 } from "../utils/ethersFacade";
 import { getVariable, Variable } from "../utils/getVariable";
 import type { Props as NFTMetadata } from "../components/MintedNFT";
@@ -46,15 +47,19 @@ export function AppContextProvider({ children }: Props) {
       const signer = await connectToWallet();
       const address = await signer.getAddress();
       if (address !== "") {
-        setWallet(signer);
         const erc721SC = getContract(
           getVariable(Variable.REACT_APP_CCHAIN_CONTRACT_ADDRESS),
           signer
         );
-        setAccount(address);
-        setContract(erc721SC);
+
         const _balance = await getBalance(address);
+        const ownedNFTs = await getOwnedNFTs(address, erc721SC);
+
+        setAccount(address);
         setBalance(_balance);
+        setContract(erc721SC);
+        setWallet(signer);
+        setMintedNFTs(ownedNFTs);
       }
     };
 

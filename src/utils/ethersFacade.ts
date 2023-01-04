@@ -1,6 +1,7 @@
 import { addressEqual } from "@usedapp/core";
 import ethers = require("ethers");
 import abi from "../abis/abi.json";
+import { Props as MintedNFT } from "../components/MintedNFT";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -46,16 +47,21 @@ export async function getBalance(account: string): Promise<string> {
 }
 
 export async function getOwnedNFTs(account: string, contract: ethers.Contract) {
-  const tokenIds: Array<number> = [];
+  const tokenMetadataList: Array<MintedNFT> = [];
 
   const tokenBalance = await contract.balanceOf(account);
   for (let i = 0; i < tokenBalance; i++) {
     const tokenId = await contract.tokenOfOwnerByIndex(account, i);
     const tokenMetadata = await contract.tokenURI(tokenId._hex);
-    tokenIds.push(JSON.parse(tokenMetadata));
+    const parsedObject = JSON.parse(tokenMetadata);
+    tokenMetadataList.push({
+      name: parsedObject.name,
+      description: parsedObject.description,
+      ipfsLink: parsedObject.image,
+    });
   }
 
-  return tokenIds;
+  return tokenMetadataList;
 }
 
 export async function getChainId(): Promise<number> {

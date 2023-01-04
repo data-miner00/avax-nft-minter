@@ -26,11 +26,6 @@ function Home(): JSX.Element {
   const { contract, setBalance, account, setMintedNFTs } =
     useContext(AppContext);
 
-  useEffect(() => {
-    if (!contract) return;
-    // getOwnedNFTs(account, contract).then(console.log).catch(console.error);
-  }, [contract]);
-
   function resetFields() {
     setSelectedImage(null);
     if (NFTNameInputRef.current) NFTNameInputRef.current.value = "";
