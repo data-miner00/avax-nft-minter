@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import PinataClient from "../utils/pinataClient";
 import { getVariable, Variable } from "../utils/getVariable";
@@ -6,7 +6,6 @@ import {
   configuraTokenURI,
   mintNFT as MT,
   getBalance,
-  getOwnedNFTs,
 } from "../utils/ethersFacade";
 import { AppContext } from "../context/AppContext";
 import Snackbar from "../components/Snackbar";
@@ -49,21 +48,16 @@ function Home(): JSX.Element {
         );
         console.log(tokenURI);
         const tx = await MT(tokenURI, contract);
-        setMintedNFTs((_mintedNFTs) => {
-          const updatedMintedNFTs = [
-            ..._mintedNFTs,
-            {
-              tokenId: tx.nonce,
-              transactionId: tx.hash,
-              ipfsLink: uploadResult.imageHash,
-              name: NFTName,
-              description: NFTDescription,
-            },
-          ];
-
-          localStorage.mintedNFT = JSON.stringify(updatedMintedNFTs);
-          return updatedMintedNFTs;
-        });
+        setMintedNFTs((_mintedNFTs) => [
+          ..._mintedNFTs,
+          {
+            tokenId: tx.nonce,
+            transactionId: tx.hash,
+            ipfsLink: uploadResult.imageHash,
+            name: NFTName,
+            description: NFTDescription,
+          },
+        ]);
 
         setSnackbar("success");
         setBalance(await getBalance(account));

@@ -1,4 +1,3 @@
-import { addressEqual } from "@usedapp/core";
 import ethers = require("ethers");
 import abi from "../abis/abi.json";
 import { Props as MintedNFT } from "../components/MintedNFT";
