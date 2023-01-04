@@ -2,7 +2,7 @@ import React from "react";
 
 export type Props = {
   tokenId: string;
-  transactionId: string;
+  transactionId?: string;
   ipfsLink: string;
   name: string;
   description: string;
@@ -43,14 +43,24 @@ function MintedNFT({
           </p>
         </div>
         <div className="py-2">
-          <a
-            data-testid="minted-view-tx"
-            href={`https://testnet.snowtrace.io/tx/${transactionId}`}
-            target="_blank"
-            className="block text-sm bg-pink-500 p-2 rounded-full mb-1 font-bold text-center"
-          >
-            View on Snowtrace
-          </a>
+          {transactionId ? (
+            <a
+              data-testid="minted-view-tx-enabled"
+              href={`https://testnet.snowtrace.io/tx/${transactionId}`}
+              target="_blank"
+              className="block text-sm bg-pink-500 p-2 rounded-full mb-1 font-bold text-center"
+            >
+              View on Snowtrace
+            </a>
+          ) : (
+            <button
+              data-testid="minted-view-tx-disabled"
+              disabled
+              className="block text-sm bg-pink-200 p-2 rounded-full mb-1 font-bold text-center"
+            >
+              View on Snowtrace
+            </button>
+          )}
           <a
             data-testid="minted-view-img"
             href={`https://gateway.pinata.cloud/ipfs/${ipfsLink}`}
