@@ -10,7 +10,7 @@ function Header(): JSX.Element {
   const { t } = useTranslation();
 
   return (
-    <header className="">
+    <header data-testid="header">
       <div className="max-w-[1400px] mx-auto md:px-8 items-center flex justify-between h-24">
         <nav className="flex items-center">
           <Link
@@ -47,7 +47,7 @@ function Header(): JSX.Element {
               </defs>
             </svg>
 
-            <span className="block ml-3 font-mono">
+            <span data-testid="header-logo" className="block ml-3 font-mono">
               Aiotter<span className="font-bold">FI</span>
             </span>
           </Link>

@@ -3,9 +3,8 @@ import abi from "../abis/abi.json";
 import { Props as MintedNFT } from "../components/MintedNFT";
 import chainlist from "../data/chainlist.json";
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-
 export async function connectToWallet(): Promise<ethers.providers.JsonRpcSigner> {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send("eth_requestAccounts", []);
   return provider.getSigner();
 }
@@ -38,6 +37,7 @@ export function configuraTokenURI(
 }
 
 export async function getBalance(account: string): Promise<string> {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
   const balance = await provider.getBalance(account);
   const balanceInFixedString = parseFloat(
     ethers.utils.formatEther(balance)
@@ -65,6 +65,7 @@ export async function getOwnedNFTs(account: string, contract: ethers.Contract) {
 }
 
 export async function getChainId(): Promise<number> {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
   const chainId = await provider.send("eth_chainId", []);
   return parseInt(chainId);
 }

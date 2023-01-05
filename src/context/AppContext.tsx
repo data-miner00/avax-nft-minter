@@ -15,7 +15,7 @@ type Props = {
   children: ReactNode;
 };
 
-type Context = {
+export type Context = {
   account: string;
   setAccount: React.Dispatch<React.SetStateAction<string>>;
   wallet: any;
