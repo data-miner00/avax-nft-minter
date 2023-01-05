@@ -6,12 +6,12 @@ import { getOwnedNFTs } from "../utils/ethersFacade";
 
 function Minted(): JSX.Element {
   const [mintedNFTs, setMintedNFTs] = useState<Array<NFTMetadata>>([]);
-  const { account, contract } = useContext(AppContext);
+  const { account, contract, chainInfo } = useContext(AppContext);
 
   useEffect(() => {
-    if (contract == null) return;
+    if (contract == null && chainInfo.chainId !== 43113) return;
     getOwnedNFTs(account, contract).then(setMintedNFTs).catch(console.error);
-  }, [contract]);
+  }, [contract, chainInfo]);
 
   return (
     <div className="max-w-[1400px] mx-auto md:px-8 py-10">
