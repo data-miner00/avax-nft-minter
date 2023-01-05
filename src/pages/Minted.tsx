@@ -5,7 +5,7 @@ import MintedNFT, { Props as NFTMetadata } from "../components/MintedNFT";
 import { getOwnedNFTs } from "../utils/ethersFacade";
 
 function Minted(): JSX.Element {
-  const [mintedNFTs, setMintedNFTs] = useState<Array<NFTMetadata>>([]);
+  const [mintedNFTs, setMintedNFTs] = useState<NFTMetadata[]>([]);
   const { account, contract, chainInfo } = useContext(AppContext);
 
   useEffect(() => {

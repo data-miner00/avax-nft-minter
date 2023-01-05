@@ -1,3 +1,4 @@
+import { ProviderProps } from "react";
 import { Context } from "../../context/AppContext";
 import HeaderSteps from "../__steps__/Header.steps";
 
@@ -11,7 +12,7 @@ describe("Header component", () => {
   });
 
   it("should renders the content properly", () => {
-    const providerProps = {
+    const providerProps: ProviderProps<Context> = {
       value: {
         account: "0xdd68c326f054bbe66b0AB5541532C686D1418b0D",
         balance: "2.000",

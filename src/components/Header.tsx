@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 import ThemeSwitcher from "./ThemeSwitcher";
 import LanguageSwitcher from "./LanguageSwitcher";
 import WalletManager from "./WalletManager";
 
 function Header(): JSX.Element {
-  const { t } = useTranslation();
-
   return (
     <header data-testid="header">
       <div className="max-w-[1400px] mx-auto md:px-8 items-center flex justify-between h-24">

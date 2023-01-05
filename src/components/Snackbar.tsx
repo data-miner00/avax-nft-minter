@@ -2,9 +2,9 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { snackbarMotion } from "../motions/snackbarMotions";
 
-type Props = {
+interface Props {
   type: "info" | "success" | "error" | "default";
-};
+}
 
 function Snackbar({ type }: Props): JSX.Element {
   let icon: ReactNode = <div></div>;

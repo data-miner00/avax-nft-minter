@@ -3,6 +3,7 @@ import axios from "axios";
 class PinataClient {
   private readonly pinataUrl: string =
     "https://api.pinata.cloud/pinning/pinFileToIPFS";
+
   private readonly apiKey: string;
   private readonly apiSecret: string;
 
@@ -11,7 +12,10 @@ class PinataClient {
     this.apiSecret = apiSecret;
   }
 
-  public async uploadImage(fileLocation: string, filename: string) {
+  public async uploadImage(
+    fileLocation: string,
+    filename: string
+  ): Promise<{ imageHash: string }> {
     const response = await axios.get(fileLocation, {
       responseType: "blob",
     });
@@ -19,7 +23,10 @@ class PinataClient {
     return await this.uploadToPinata(response.data, filename);
   }
 
-  private async uploadToPinata(image: any, name: string) {
+  private async uploadToPinata(
+    image: any,
+    name: string
+  ): Promise<{ imageHash: string }> {
     const formData = new FormData();
     formData.append("file", image, name);
 
@@ -27,7 +34,7 @@ class PinataClient {
       maxContentLength: Infinity,
       headers: {
         "Content-Type": `multipart/form-data;boundary=${
-          (formData as any)._boundary
+          (formData as any)._boundary // eslint-disable-line
         }`,
         pinata_api_key: this.apiKey,
         pinata_secret_api_key: this.apiSecret,

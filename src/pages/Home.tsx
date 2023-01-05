@@ -24,17 +24,21 @@ function Home(): JSX.Element {
   >("default");
   const { contract, setBalance, account } = useContext(AppContext);
 
-  function resetFields() {
+  function resetFields(): void {
     setSelectedImage(null);
-    if (NFTNameInputRef.current) NFTNameInputRef.current.value = "";
-    if (NFTDescriptionInputRef.current)
+    if (NFTNameInputRef.current != null) NFTNameInputRef.current.value = "";
+    if (NFTDescriptionInputRef.current != null)
       NFTDescriptionInputRef.current.value = "";
   }
 
-  async function mintNFT() {
-    const NFTName = NFTNameInputRef.current!.value;
-    const NFTDescription = NFTDescriptionInputRef.current!.value;
-    if (selectedImage && NFTName && NFTDescription) {
+  async function mintNFT(): Promise<void> {
+    const NFTName = NFTNameInputRef.current?.value;
+    const NFTDescription = NFTDescriptionInputRef.current?.value;
+    if (
+      selectedImage != null &&
+      NFTName !== undefined &&
+      NFTDescription !== undefined
+    ) {
       try {
         const uploadResult = await pinataClient.uploadImage(
           URL.createObjectURL(selectedImage),
@@ -74,7 +78,7 @@ function Home(): JSX.Element {
             <h1 className="pl-2 text-xl font-semibold mb-3">Mint</h1>
 
             <div className="rounded-md h-96 w-[40rem] mx-auto grid place-items-center border border-solid border-gray-50 dark:border-gray-600">
-              {selectedImage ? (
+              {selectedImage != null ? (
                 <div className="max-w-md">
                   <img
                     className="mb-4 max-h-80"
@@ -126,7 +130,9 @@ function Home(): JSX.Element {
                 </button>
                 <button
                   className="py-2 pl-2 pr-3 ml-2 bg-emerald-400 text-emerald-800 dark:text-white dark:bg-green-600 rounded-xl flex items-center"
-                  onClick={mintNFT}
+                  onClick={() => {
+                    void mintNFT();
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +152,7 @@ function Home(): JSX.Element {
         </div>
       </div>
       <AnimatePresence>
-        {snackbar != "default" && <Snackbar type={snackbar} />}
+        {snackbar !== "default" && <Snackbar type={snackbar} />}
       </AnimatePresence>
     </>
   );

@@ -1,12 +1,10 @@
-import React from "react";
-import { render, RenderOptions } from "@testing-library/react";
+import React, { ProviderProps } from "react";
+import { render, RenderOptions, RenderResult } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 import Header from "../Header";
 import BaseSteps from "./Base.steps";
 import { AppContext, Context } from "../../context/AppContext";
-
-import { ProviderProps } from "react";
 
 class HeaderSteps extends BaseSteps<HeaderSteps> {
   private providerProps: ProviderProps<Context>;
@@ -38,7 +36,7 @@ class HeaderSteps extends BaseSteps<HeaderSteps> {
       providerProps,
       ...renderOptions
     }: RenderOptions & { providerProps: { value: Context } }
-  ) {
+  ): RenderResult {
     return render(
       <AppContext.Provider {...providerProps}>{ui}</AppContext.Provider>,
       renderOptions

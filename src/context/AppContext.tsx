@@ -11,11 +11,11 @@ import {
 } from "../utils/ethersFacade";
 import { getVariable, Variable } from "../utils/getVariable";
 
-type Props = {
+interface Props {
   children: ReactNode;
-};
+}
 
-export type Context = {
+export interface Context {
   account: string;
   setAccount: React.Dispatch<React.SetStateAction<string>>;
   wallet: any;
@@ -26,11 +26,13 @@ export type Context = {
   setBalance: React.Dispatch<React.SetStateAction<string>>;
   chainInfo: ChainInfo;
   setChainInfo: React.Dispatch<React.SetStateAction<ChainInfo>>;
-};
+}
 
-export const AppContext = React.createContext<Context>({} as Context);
+export const AppContext: React.Context<Context> = React.createContext<Context>(
+  {} as Context
+);
 
-export function AppContextProvider({ children }: Props) {
+export function AppContextProvider({ children }: Props): JSX.Element {
   const [account, setAccount] = useState("");
   const [wallet, setWallet] = useState<any>(null);
   const [contract, setContract] = useState<any>(null);
@@ -38,7 +40,7 @@ export function AppContextProvider({ children }: Props) {
   const [chainInfo, setChainInfo] = useState<ChainInfo>(notConnectedChainInfo);
 
   useEffect(() => {
-    const connectProcess = async () => {
+    const connectProcess = async (): Promise<void> => {
       const signer = await connectToWallet();
       const address = await signer.getAddress();
       if (address !== "") {

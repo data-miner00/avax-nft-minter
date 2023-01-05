@@ -8,7 +8,7 @@ function WalletManager(): JSX.Element {
   const identiconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (account && identiconRef.current) {
+    if (account !== "" && identiconRef.current != null) {
       identiconRef.current.innerHTML = "";
       identiconRef.current.appendChild(
         jazzicon(20, parseInt(account.slice(2, 10), 16))
@@ -25,7 +25,7 @@ function WalletManager(): JSX.Element {
 
   return (
     <div>
-      {account ? (
+      {account !== "" ? (
         <div className="flex items-center">
           <div
             className={`flex items-center rounded-xl mr-1 ${chainColors} px-3 py-[6px] font-semibold`}

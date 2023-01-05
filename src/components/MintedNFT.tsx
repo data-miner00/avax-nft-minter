@@ -1,10 +1,10 @@
 import React from "react";
 
-export type Props = {
+export interface Props {
   ipfsLink: string;
   name: string;
   description: string;
-};
+}
 
 function MintedNFT({ ipfsLink, name, description }: Props): JSX.Element {
   return (

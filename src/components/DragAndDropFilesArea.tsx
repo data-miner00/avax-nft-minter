@@ -1,9 +1,9 @@
 import React from "react";
 
-type Props = {
+export interface Props {
   onDrop: (event: React.DragEvent<HTMLLabelElement>) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 function DragAndDropFilesArea({ onDrop, onChange }: Props): JSX.Element {
   return (

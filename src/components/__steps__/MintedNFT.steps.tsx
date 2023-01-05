@@ -9,6 +9,7 @@ class MintedNFTSteps extends BaseSteps<MintedNFTSteps, Props> {
     render(<MintedNFT {...this.props} />);
     return this;
   }
+
   public getSteps(): MintedNFTSteps {
     return this;
   }

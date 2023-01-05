@@ -16,7 +16,10 @@ export function getContract(
   return new ethers.Contract(address, abi, signer);
 }
 
-export async function mintNFT(stringURI: string, contract: ethers.Contract) {
+export async function mintNFT(
+  stringURI: string,
+  contract: ethers.Contract
+): Promise<any> {
   const tx = await contract.mint(stringURI);
   console.log("Transaction: ", tx);
   await tx.wait();
@@ -27,7 +30,7 @@ export function configuraTokenURI(
   imageURL: string,
   name: string,
   description: string
-) {
+): string {
   return JSON.stringify({
     name,
     description,
@@ -46,8 +49,11 @@ export async function getBalance(account: string): Promise<string> {
   return balanceInFixedString;
 }
 
-export async function getOwnedNFTs(account: string, contract: ethers.Contract) {
-  const tokenMetadataList: Array<MintedNFT> = [];
+export async function getOwnedNFTs(
+  account: string,
+  contract: ethers.Contract
+): Promise<MintedNFT[]> {
+  const tokenMetadataList: MintedNFT[] = [];
 
   const tokenBalance = await contract.balanceOf(account);
   for (let i = 0; i < tokenBalance; i++) {
@@ -70,12 +76,12 @@ export async function getChainId(): Promise<number> {
   return parseInt(chainId);
 }
 
-export type ChainInfo = {
+export interface ChainInfo {
   chainId: number;
   chainName: string;
   isTestnet: boolean;
   currency: string;
-};
+}
 
 export const notConnectedChainInfo: ChainInfo = {
   chainId: 0,
@@ -91,7 +97,7 @@ export const defaultUnknownChainInfo: ChainInfo = {
   currency: "NUL",
 };
 
-const chainInfos: Array<ChainInfo> = chainlist;
+const chainInfos: ChainInfo[] = chainlist;
 
 export async function getChainInfo(): Promise<ChainInfo> {
   const chainId = await getChainId();
