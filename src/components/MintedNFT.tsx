@@ -8,7 +8,10 @@ export type Props = {
 
 function MintedNFT({ ipfsLink, name, description }: Props): JSX.Element {
   return (
-    <div className="rounded-lg bg-slate-200 dark:bg-gray-700 w-96 overflow-hidden">
+    <div
+      className="rounded-lg bg-slate-200 dark:bg-gray-700 w-96 overflow-hidden"
+      data-testid="minted"
+    >
       <div className="h-64 border-b border-solid border-gray-100 dark:border-gray-600 p-4 relative">
         <img
           className="block h-full mx-auto"
@@ -19,6 +22,7 @@ function MintedNFT({ ipfsLink, name, description }: Props): JSX.Element {
 
         <a
           title="View on IPFS"
+          data-testid="minted-view-img"
           href={`https://gateway.pinata.cloud/ipfs/${ipfsLink}`}
           target="_blank"
           rel="noopener noreferrer"
