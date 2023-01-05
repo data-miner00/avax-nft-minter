@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { AppContext } from "../context/AppContext";
-import MintedNFT from "../components/MintedNFT";
+import MintedNFT, { Props as NFTMetadata } from "../components/MintedNFT";
+import { getOwnedNFTs } from "../utils/ethersFacade";
 
 function Minted(): JSX.Element {
-  const { mintedNFTs } = useContext(AppContext);
+  const [mintedNFTs, setMintedNFTs] = useState<Array<NFTMetadata>>([]);
+  const { account, contract } = useContext(AppContext);
+
+  useEffect(() => {
+    getOwnedNFTs(account, contract).then(setMintedNFTs).catch(console.error);
+  }, [contract]);
 
   return (
     <div className="max-w-[1400px] mx-auto md:px-8">
@@ -15,8 +21,6 @@ function Minted(): JSX.Element {
           {mintedNFTs.map((nft, index) => (
             <MintedNFT
               key={index}
-              tokenId={nft.tokenId}
-              transactionId={nft.transactionId}
               ipfsLink={nft.ipfsLink}
               description={nft.description}
               name={nft.name}

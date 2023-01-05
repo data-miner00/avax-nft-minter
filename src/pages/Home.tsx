@@ -22,8 +22,7 @@ function Home(): JSX.Element {
   const [snackbar, setSnackbar] = useState<
     "info" | "success" | "error" | "default"
   >("default");
-  const { contract, setBalance, account, setMintedNFTs } =
-    useContext(AppContext);
+  const { contract, setBalance, account } = useContext(AppContext);
 
   function resetFields() {
     setSelectedImage(null);
@@ -48,16 +47,13 @@ function Home(): JSX.Element {
         );
         console.log(tokenURI);
         const tx = await MT(tokenURI, contract);
-        setMintedNFTs((_mintedNFTs) => [
-          ..._mintedNFTs,
-          {
-            tokenId: tx.nonce,
-            transactionId: tx.hash,
-            ipfsLink: uploadResult.imageHash,
-            name: NFTName,
-            description: NFTDescription,
-          },
-        ]);
+        console.log({
+          tokenId: tx.nonce,
+          transactionId: tx.hash,
+          ipfsLink: uploadResult.imageHash,
+          name: NFTName,
+          description: NFTDescription,
+        });
 
         setSnackbar("success");
         setBalance(await getBalance(account));

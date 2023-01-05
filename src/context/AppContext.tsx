@@ -8,10 +8,8 @@ import {
   ChainInfo,
   notConnectedChainInfo,
   reloadOnNetworkChange,
-  getOwnedNFTs,
 } from "../utils/ethersFacade";
 import { getVariable, Variable } from "../utils/getVariable";
-import type { Props as NFTMetadata } from "../components/MintedNFT";
 
 type Props = {
   children: ReactNode;
@@ -28,8 +26,6 @@ type Context = {
   setBalance: React.Dispatch<React.SetStateAction<string>>;
   chainInfo: ChainInfo;
   setChainInfo: React.Dispatch<React.SetStateAction<ChainInfo>>;
-  mintedNFTs: Array<NFTMetadata>;
-  setMintedNFTs: React.Dispatch<React.SetStateAction<Array<NFTMetadata>>>;
 };
 
 export const AppContext = React.createContext<Context>({} as Context);
@@ -40,7 +36,6 @@ export function AppContextProvider({ children }: Props) {
   const [contract, setContract] = useState<any>(null);
   const [balance, setBalance] = useState<string>("0.000");
   const [chainInfo, setChainInfo] = useState<ChainInfo>(notConnectedChainInfo);
-  const [mintedNFTs, setMintedNFTs] = useState<Array<NFTMetadata>>([]);
 
   useEffect(() => {
     const connectProcess = async () => {
@@ -53,13 +48,11 @@ export function AppContextProvider({ children }: Props) {
         );
 
         const _balance = await getBalance(address);
-        const ownedNFTs = await getOwnedNFTs(address, erc721SC);
 
         setAccount(address);
         setBalance(_balance);
         setContract(erc721SC);
         setWallet(signer);
-        setMintedNFTs(ownedNFTs);
       }
     };
 
@@ -84,8 +77,6 @@ export function AppContextProvider({ children }: Props) {
         setBalance,
         chainInfo,
         setChainInfo,
-        mintedNFTs,
-        setMintedNFTs,
       }}
     >
       {children}
