@@ -9,6 +9,7 @@ function Minted(): JSX.Element {
   const { account, contract } = useContext(AppContext);
 
   useEffect(() => {
+    if (contract == null) return;
     getOwnedNFTs(account, contract).then(setMintedNFTs).catch(console.error);
   }, [contract]);
 

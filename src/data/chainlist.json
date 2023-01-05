@@ -3,36 +3,48 @@
     "chainId": 1,
     "chainName": "Ethereum",
     "isTestnet": false,
-    "currency": "ETH"
+    "currency": "ETH",
+    "blockExplorerName": "Etherscan",
+    "explorerBaseUrl": "https://etherscan.io/tx/"
   },
   {
     "chainId": 4,
     "chainName": "Rinkeby",
     "isTestnet": true,
-    "currency": "ETH"
+    "currency": "ETH",
+    "blockExplorerName": "Etherscan",
+    "explorerBaseUrl": "https://sepolia.etherscan.io/tx"
   },
   {
     "chainId": 5,
     "chainName": "Goerli",
     "isTestnet": true,
-    "currency": "ETH"
+    "currency": "ETH",
+    "blockExplorerName": "Etherscan",
+    "explorerBaseUrl": "https://goerli.etherscan.io/tx"
   },
   {
     "chainId": 137,
     "chainName": "Polygon",
     "isTestnet": false,
-    "currency": "MATIC"
+    "currency": "MATIC",
+    "blockExplorerName": "Polygonscan",
+    "explorerBaseUrl": "https://polygonscan.com/tx/"
   },
   {
     "chainId": 43112,
     "chainName": "Avalanche",
     "isTestnet": false,
-    "currency": "AVAX"
+    "currency": "AVAX",
+    "blockExplorerName": "Snowtrace",
+    "explorerBaseUrl": "https://snowtrace.io/tx"
   },
   {
     "chainId": 43113,
     "chainName": "Avalanche Fuji",
     "isTestnet": true,
-    "currency": "AVAX"
+    "currency": "AVAX",
+    "blockExplorerName": "Snowtrace",
+    "explorerBaseUrl": "https://testnet.snowtrace.io/tx/"
   }
 ]
