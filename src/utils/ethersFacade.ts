@@ -1,6 +1,7 @@
 import ethers = require("ethers");
 import abi from "../abis/abi.json";
 import { Props as MintedNFT } from "../components/MintedNFT";
+import chainlist from "../data/chainlist.json";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -89,44 +90,7 @@ export const defaultUnknownChainInfo: ChainInfo = {
   currency: "NUL",
 };
 
-const chainInfos: Array<ChainInfo> = [
-  {
-    chainId: 1,
-    chainName: "Ethereum",
-    isTestnet: false,
-    currency: "ETH",
-  },
-  {
-    chainId: 4,
-    chainName: "Rinkeby",
-    isTestnet: true,
-    currency: "ETH",
-  },
-  {
-    chainId: 5,
-    chainName: "Goerli",
-    isTestnet: true,
-    currency: "ETH",
-  },
-  {
-    chainId: 137,
-    chainName: "Polygon",
-    isTestnet: false,
-    currency: "MATIC",
-  },
-  {
-    chainId: 43112,
-    chainName: "Avalanche",
-    isTestnet: false,
-    currency: "AVAX",
-  },
-  {
-    chainId: 43113,
-    chainName: "Avalanche Fuji",
-    isTestnet: true,
-    currency: "AVAX",
-  },
-];
+const chainInfos: Array<ChainInfo> = chainlist;
 
 export async function getChainInfo(): Promise<ChainInfo> {
   const chainId = await getChainId();

@@ -1,0 +1,38 @@
+[
+  {
+    "chainId": 1,
+    "chainName": "Ethereum",
+    "isTestnet": false,
+    "currency": "ETH"
+  },
+  {
+    "chainId": 4,
+    "chainName": "Rinkeby",
+    "isTestnet": true,
+    "currency": "ETH"
+  },
+  {
+    "chainId": 5,
+    "chainName": "Goerli",
+    "isTestnet": true,
+    "currency": "ETH"
+  },
+  {
+    "chainId": 137,
+    "chainName": "Polygon",
+    "isTestnet": false,
+    "currency": "MATIC"
+  },
+  {
+    "chainId": 43112,
+    "chainName": "Avalanche",
+    "isTestnet": false,
+    "currency": "AVAX"
+  },
+  {
+    "chainId": 43113,
+    "chainName": "Avalanche Fuji",
+    "isTestnet": true,
+    "currency": "AVAX"
+  }
+]
