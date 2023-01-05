@@ -14,11 +14,11 @@ function Minted(): JSX.Element {
   }, [contract]);
 
   return (
-    <div className="max-w-[1400px] mx-auto md:px-8">
-      <h1 className="text-xl font-semibold mb-3">Minted NFTs</h1>
+    <div className="max-w-[1400px] mx-auto md:px-8 py-10">
+      <h1 className="text-3xl font-semibold mb-8 text-center">Minted NFTs</h1>
 
       {mintedNFTs.length > 0 ? (
-        <div>
+        <div className="flex gap-5 flex-wrap justify-center">
           {mintedNFTs.map((nft, index) => (
             <MintedNFT
               key={index}
