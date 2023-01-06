@@ -61,9 +61,17 @@
 
 ## About The Project
 
-![Project screenshot](/public/assets/screenshot.png)
+![Application screenshot](/public/assets/screenshot-light-mode.png)
 
-A mini NFT Minter that allows user to upload any images to be minted. The minted NFTs will fall under the token named Arts with symbol ARTZ.
+A mini NFT Minter that allows user to upload any images to be minted. The minted NFTs will fall under the token named Arts with symbol ARTZ. The contract was deployed on Avalanche Fuji at [0xC7821A1FCD5Ad9441d9909A71Dc45bb2B636a78B](https://testnet.snowtrace.io/address/0xc7821a1fcd5ad9441d9909a71dc45bb2b636a78b).
+
+![Minted NFT page](/public/assets/screenshot-mint-page.png)
+
+The page that shows all minted NFTs by the user under the contract.
+
+![Application screenshot on dark mode](/public/assets/screenshot-dark-mode.png)
+
+The application in dark mode.
 
 Incentives:
 
@@ -94,9 +102,7 @@ The technologies and tools used within this project.
 
 ### Design
 
-Charts are very useful to let people know the high level designs of the project. Usually people will use some of more sophisticated third-party diagramming tools such as Enterprese Architect or a light-weighted [draw.io](https://app.diagrams.net).
-
-Contrary to the public's awareness, GitHub actually supports diagramming language [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams) that can generate a wide array of diagrams such as flowchart, sequence diagram, class diagram and more!
+The following diagram shows roughly how the interaction happens with the application.
 
 ```mermaid
 graph TD;
@@ -129,7 +135,7 @@ The list of tools that is used when development.
 
 ### Installation
 
-_To use this template for personal use or contribution, simply perform the following._ A total of **3 terminals** are required to get 3 of the core components of application up and running for development. However, it is possible to start all the necessary processes with one terminal by using `pnpm dev` as shown on step 7.
+_To use this project for personal use or contribution, simply perform the following._ A total of **3 terminals** are required to get 3 of the core components of application up and running for development. However, it is possible to start all the necessary processes with one terminal by using `pnpm dev` as shown on step 7.
 
 1. Clone the repo
    ```sh
@@ -188,11 +194,14 @@ _To use this template for personal use or contribution, simply perform the follo
 ## Roadmap
 
 - [x] First implementation
-- [ ] Fix dark mode
-- [ ] Enhance design and stylings
+- [x] Fix dark mode
+- [x] Enhance design and stylings
 - [ ] Add translations
   - [ ] Korean
   - [ ] Japanese
+- [ ] Add loading state to Mint page
+- [ ] Fix 404 Page
+- [ ] Refactor snackbar and add tests
 
 See the [open issues](https://github.com/data-miner00/avax-nft-minter/issues) for a full list of proposed features (and known issues).
 
