@@ -9,6 +9,7 @@ function DragAndDropFilesArea({ onDrop, onChange }: Props): JSX.Element {
   return (
     <>
       <label
+        data-testid="drag-drop-area"
         onDragOver={(event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -35,6 +36,7 @@ function DragAndDropFilesArea({ onDrop, onChange }: Props): JSX.Element {
         <span className="block mt-5">Drag and drop or click to upload</span>
       </label>
       <input
+        data-testid="drag-drop-hidden-input"
         id="image-upload"
         className="hidden"
         type="file"
