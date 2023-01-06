@@ -12,22 +12,22 @@
 <br />
 <div align="center">
   <a href="/">
-    <img src="public/assets/react-esbuild.png" />
+    <img width="160px" src="public/favicon.svg" />
   </a>
 
-  <h3 align="center">React-Esbuild Template</h3>
+  <h3 align="center">AiotterFI - NFT Minter</h3>
 
   <p align="center">
-    An opionionated React Template that is built for customization!
+    A custom ERC721 NFT minter on Avalanche Fuji with token ARTZ!
     <br />
-    <a href="https://github.com/data-miner00/React-Esbuild-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/data-miner00/avax-nft-minter"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/data-miner00/React-Esbuild-Template">View Demo</a>
+    <a href="https://github.com/data-miner00/avax-nft-minter">View Demo</a>
     ·
-    <a href="https://github.com/data-miner00/React-Esbuild-Template/issues">Report Bug</a>
+    <a href="https://github.com/data-miner00/avax-nft-minter/issues">Report Bug</a>
     ·
-    <a href="https://github.com/data-miner00/React-Esbuild-Template/issues">Request Feature</a>
+    <a href="https://github.com/data-miner00/avax-nft-minter/issues">Request Feature</a>
   </p>
 </div>
 
@@ -61,24 +61,30 @@
 
 ## About The Project
 
-![Template screenshot](/public/assets/screenshot.png)
+![Application screenshot](/public/assets/screenshot-light-mode.png)
 
-An extremely opinionated template for building React applications. Focus on the application itself rather than all these low-level configuration stuffs.
+A mini NFT Minter that allows user to upload any images to be minted. The minted NFTs will fall under the token named Arts with symbol ARTZ. The contract was deployed on Avalanche Fuji at [0xC7821A1FCD5Ad9441d9909A71Dc45bb2B636a78B](https://testnet.snowtrace.io/address/0xc7821a1fcd5ad9441d9909a71dc45bb2b636a78b).
+
+![Minted NFT page](/public/assets/screenshot-mint-page.png)
+
+The page that shows all minted NFTs by the user under the contract.
+
+![Application screenshot on dark mode](/public/assets/screenshot-dark-mode.png)
+
+The application in dark mode.
 
 Incentives:
 
-- Wanted to build a web portal with Zilliqa.js
-- Don't want to use `create-react-app`
-- Don't want to use Next.js
-- Buitl this React template so I can use for other projects.
+- Wanted to try out Avalanche C-Chain
+- Wanted to prepare for a NFT marketplace
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+This is a very rough version of the project and is far from complete. Iterations of enhancement will be carried out as time goes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-The technologies and tools used within this template.
+The technologies and tools used within this project.
 
 - React
 - Esbuild
@@ -88,6 +94,7 @@ The technologies and tools used within this template.
 - TailwindCSS
 - Framer Motion
 - GitHub Workflow
+- Ethers.js
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -95,16 +102,15 @@ The technologies and tools used within this template.
 
 ### Design
 
-Charts are very useful to let people know the high level designs of the project. Usually people will use some of more sophisticated third-party diagramming tools such as Enterprese Architect or a light-weighted [draw.io](https://app.diagrams.net).
-
-Contrary to the public's awareness, GitHub actually supports diagramming language [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams) that can generate a wide array of diagrams such as flowchart, sequence diagram, class diagram and more!
+The following diagram shows roughly how the interaction happens with the application.
 
 ```mermaid
 graph TD;
-    PorsgreSQL-->Laravel;
-    avax[Avalanche C-Chain]-->Laravel;
-    Laravel-->Vue.js;
-    Node.js-->Vue.js;
+    Hardhat -- Contract --> cchain[Avalanche C-Chain];
+    Metamask -- query contract --> cchain;
+    cchain -- contract instance --> Metamask;
+    React --> Metamask;
+    Metamask --> React;
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -129,11 +135,11 @@ The list of tools that is used when development.
 
 ### Installation
 
-_To use this template for personal use or contribution, simply perform the following._ A total of **3 terminals** are required to get 3 of the core components of application up and running for development. However, it is possible to start all the necessary processes with one terminal by using `pnpm dev` as shown on step 7.
+_To use this project for personal use or contribution, simply perform the following._ A total of **3 terminals** are required to get 3 of the core components of application up and running for development. However, it is possible to start all the necessary processes with one terminal by using `pnpm dev` as shown on step 7.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/data-miner00/React-Esbuild-Template.git
+   git clone https://github.com/data-miner00/avax-nft-minter.git
    ```
 2. Install Node dependencies
    ```sh
@@ -187,27 +193,17 @@ _To use this template for personal use or contribution, simply perform the follo
 
 ## Roadmap
 
-- [x] Add TypeScript
-- [x] Add ESLint
-- [x] Add Jest/Testing Library
-- [x] Add React Router (Lazy Loading)
-- [x] Add 404 page
-- [x] Add Framer Motion
-- [x] Add Styling
-  - [ ] Sass
-  - [x] Tailwind
-- [x] Add i18n
+- [x] First implementation
+- [x] Fix dark mode
+- [x] Enhance design and stylings
+- [ ] Add translations
   - [ ] Korean
-  - [x] Japanese
-  - [ ] Chinese
-- [ ] Authentication
-  - [ ] OAuth 2.0? OpenID Connect?
-- [ ] Prisma
-- [x] Dark mode
-- [x] Add GitHub workflows
-- [ ] Add PWA Manifest
+  - [ ] Japanese
+- [ ] Add loading state to Mint page
+- [ ] Fix 404 Page
+- [ ] Refactor snackbar and add tests
 
-See the [open issues](https://github.com/data-miner00/React-Esbuild-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/data-miner00/avax-nft-minter/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -255,21 +251,21 @@ List of resources that are helpful and would like to give credit to.
 - [GitHub Actions](https://github.com/marketplace?type=actions)
 - [Pnpm CI](https://pnpm.io/continuous-integration)
 - [global is not defined](https://github.com/WalletConnect/walletconnect-monorepo/issues/1144)
+- [Connect Metamask](https://github.com/jacobedawson/connect-metamask-react-dapp/blob/main/README.md)
+- [Cannot set property of #<Object> which has only a getter](https://github.com/evanw/esbuild/issues/587)
+- [React & TypeScript: Avoid context default value](https://stackoverflow.com/questions/61333188/react-typescript-avoid-context-default-value)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/data-miner00/React-Esbuild-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/data-miner00/React-Esbuild-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/data-miner00/React-Esbuild-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/data-miner00/React-Esbuild-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/data-miner00/React-Esbuild-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/data-miner00/React-Esbuild-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/data-miner00/React-Esbuild-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/data-miner00/React-Esbuild-Template/issues
-[license-shield]: https://img.shields.io/github/license/data-miner00/React-Esbuild-Template.svg?style=for-the-badge
-[license-url]: https://github.com/data-miner00/React-Esbuild-Template/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
-[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[react-url]: https://reactjs.org/
+[contributors-shield]: https://img.shields.io/github/contributors/data-miner00/avax-nft-minter.svg?style=for-the-badge
+[contributors-url]: https://github.com/data-miner00/avax-nft-minter/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/data-miner00/avax-nft-minter.svg?style=for-the-badge
+[forks-url]: https://github.com/data-miner00/avax-nft-minter/network/members
+[stars-shield]: https://img.shields.io/github/stars/data-miner00/avax-nft-minter.svg?style=for-the-badge
+[stars-url]: https://github.com/data-miner00/avax-nft-minter/stargazers
+[issues-shield]: https://img.shields.io/github/issues/data-miner00/avax-nft-minter.svg?style=for-the-badge
+[issues-url]: https://github.com/data-miner00/avax-nft-minter/issues
+[license-shield]: https://img.shields.io/github/license/data-miner00/avax-nft-minter.svg?style=for-the-badge
+[license-url]: https://github.com/data-miner00/avax-nft-minter/blob/master/LICENSE.txt

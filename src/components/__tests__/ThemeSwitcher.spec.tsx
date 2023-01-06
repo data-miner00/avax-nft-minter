@@ -1,10 +1,13 @@
-import React from "react";
-import { render } from "@testing-library/react";
-
-import ThemeSwitcher from "../ThemeSwitcher";
+import ThemeSwitcherSteps from "../__steps__/ThemeSwitcher.steps";
 
 describe("ThemeSwitcher component", () => {
+  let steps: ThemeSwitcherSteps;
+
+  beforeEach(() => {
+    steps = new ThemeSwitcherSteps();
+  });
+
   it("should renders correctly", () => {
-    render(<ThemeSwitcher />);
+    steps.whenIRenderComponent().thenIExpectElementToExist("theme-switcher");
   });
 });

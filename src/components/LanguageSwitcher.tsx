@@ -12,9 +12,13 @@ function LanguageSwitcher(): JSX.Element {
   }
 
   return (
-    <div className="relative flex items-center">
+    <div
+      data-testid="language-switcher"
+      className="relative flex items-center ml-1 bg-gray-200 dark:bg-gray-600 rounded-xl"
+    >
       <button
-        className="flex items-center justify-between px-2"
+        data-testid="language-switcher-button"
+        className="flex items-center justify-between p-2"
         onClick={() => setPopoverOpen((state) => !state)}
       >
         <svg
@@ -45,7 +49,10 @@ function LanguageSwitcher(): JSX.Element {
         </svg>
       </button>
       {popoverOpen && (
-        <div className="absolute w-24 -bottom-28 -left-5 z-20 flex flex-col bg-gray-200/50 dark:bg-gray-600/50 rounded shadow-md">
+        <div
+          data-testid="language-switcher-popover"
+          className="absolute w-24 -bottom-28 -left-5 z-20 flex flex-col bg-gray-200/50 dark:bg-gray-600/50 rounded shadow-md"
+        >
           <button
             className="px-2 py-3 block"
             onClick={() => handleLanguageSwitch("en")}
