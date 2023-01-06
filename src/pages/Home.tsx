@@ -1,5 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
+
 import PinataClient from "../utils/pinataClient";
 import { getVariable, Variable } from "../utils/getVariable";
 import {
@@ -23,6 +25,7 @@ function Home(): JSX.Element {
     "info" | "success" | "error" | "default"
   >("default");
   const { contract, setBalance, account } = useContext(AppContext);
+  const { t } = useTranslation();
 
   function resetFields(): void {
     setSelectedImage(null);
@@ -75,7 +78,7 @@ function Home(): JSX.Element {
       <div className="max-w-[1400px] mx-auto md:px-8 md:py-8 flex justify-center items-center">
         <div>
           <div className="rounded-xl px-3 py-2 bg-white dark:bg-gray-700 drop-shadow-lg mt-9">
-            <h1 className="pl-2 text-xl font-semibold mb-3">Mint</h1>
+            <h1 className="pl-2 text-xl font-semibold mb-3">{t("mint")}</h1>
 
             <div className="rounded-md h-96 w-[40rem] mx-auto grid place-items-center border border-solid border-gray-50 dark:border-gray-600">
               {selectedImage != null ? (
@@ -104,13 +107,13 @@ function Home(): JSX.Element {
                   className="block px-3 py-[6px] text-sm rounded dark:bg-gray-700 dark:placeholder:text-gray-500 outline-1 outline-slate-600 focus:outline"
                   type="text"
                   ref={NFTNameInputRef}
-                  placeholder="NFT Name"
+                  placeholder={t("nft_name") ?? "NFT Name"}
                 />
                 <input
                   className="ml-1 block px-3 py-[6px] w-[320px] text-sm rounded dark:bg-gray-700 dark:placeholder:text-gray-500 outline-1 outline-slate-600 focus:outline"
                   type="text"
                   ref={NFTDescriptionInputRef}
-                  placeholder="Description"
+                  placeholder={t("nft_description") ?? "Description"}
                 />
               </div>
               <div className="flex text-sm">
@@ -144,7 +147,7 @@ function Home(): JSX.Element {
                   >
                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
                   </svg>
-                  <span className="block ml-1">Mint</span>
+                  <span className="block ml-1">{t("mint")}</span>
                 </button>
               </div>
             </div>

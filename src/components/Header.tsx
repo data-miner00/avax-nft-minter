@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import ThemeSwitcher from "./ThemeSwitcher";
 import LanguageSwitcher from "./LanguageSwitcher";
 import WalletManager from "./WalletManager";
 
 function Header(): JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <header data-testid="header">
       <div className="max-w-[1400px] mx-auto md:px-8 items-center flex justify-between h-24">
@@ -52,13 +55,13 @@ function Header(): JSX.Element {
             to="/minted"
             className="block ml-5 hover:bg-gray-200 dark:hover:bg-gray-700/50 px-4 py-2 rounded-lg hover:text-black dark:hover:text-white text-gray-500"
           >
-            Minted
+            {t("minted")}
           </Link>
           <Link
             to="/about"
             className="block ml-5 hover:bg-gray-200 dark:hover:bg-gray-700/50 px-4 py-2 rounded-lg hover:text-black dark:hover:text-white text-gray-500"
           >
-            About
+            {t("about")}
           </Link>
         </nav>
 
