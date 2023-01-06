@@ -9,6 +9,7 @@ class ThemeSwitcherSteps extends BaseSteps<ThemeSwitcherSteps> {
     render(<ThemeSwitcher />);
     return this;
   }
+
   public getSteps(): ThemeSwitcherSteps {
     return this;
   }

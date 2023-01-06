@@ -9,6 +9,7 @@ class LanguageSwitcherSteps extends BaseSteps<LanguageSwitcherSteps> {
     render(<LanguageSwitcher />);
     return this;
   }
+
   public getSteps(): LanguageSwitcherSteps {
     return this;
   }
